@@ -7,8 +7,13 @@ const PORT = 3000;
 // Middleware to parse JSON bodies
 app.use(bodyParser.json());
 
+// Root route to avoid "Cannot GET /"
+app.get('/', (req, res) => {
+  res.send('Welcome to the CogniAccess Backend! API is running...');
+});
+
 // Google Generative AI setup (ensure your API key is correct)
-const genAI = new GoogleGenerativeAI(AIzaSyDpL8hvC6Qi380Lj6S7Ma61hGuQIwKUQ7I); //"YOUR_API_KEY" // Replace with your Google API key
+const genAI = new GoogleGenerativeAI("AIzaSyDpL8hvC6Qi380Lj6S7Ma61hGuQIwKUQ7I");  // Replace with your Google API key
 const model = genAI.getGenerativeModel({ model: "gemini-1.5-flash" });
 
 app.post('/summarize', async (req, res) => {
